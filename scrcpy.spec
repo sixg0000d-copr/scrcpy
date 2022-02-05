@@ -1,11 +1,11 @@
 %define         pkgname         scrcpy
 %global         forgeurl        https://github.com/Genymobile/%{pkgname}
-Version:        1.21
+Version:        1.22
 
 %forgemeta
 
 Name:           %{pkgname}
-Release:        4%{?dist}
+Release:        1%{?dist}
 Summary:        Display and control your Android device
 License:        ASL 2.0
 
@@ -15,7 +15,7 @@ Source1:        https://github.com/Genymobile/%{pkgname}/releases/download/v%{ve
 Source2:        %{pkgname}.desktop
 
 BuildRequires:  meson gcc
-BuildRequires:  java-devel >= 8
+BuildRequires:  java-devel >= 11
 BuildRequires:  desktop-file-utils
 
 BuildRequires:  pkgconfig(sdl2)
