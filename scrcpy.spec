@@ -34,7 +34,7 @@ This application provides display and control of Android devices
 connected on USB (or over TCP/IP).
 
 %prep
-%forgeautosetup
+%forgeautosetup -p 1
 
 %build
 %meson -Db_lto=true -Dprebuilt_server='%{S:1}'
