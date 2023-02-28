@@ -1,0 +1,45 @@
+From 1857636ab3cdabeaa5d56066e0ed4259b791a2c3 Mon Sep 17 00:00:00 2001
+From: sixg0000d <sixg0000d@gmail.com>
+Date: Tue, 28 Feb 2023 23:37:50 +0800
+Subject: [PATCH] Fix exec quotes and escapes
+
+---
+ app/data/scrcpy-console.desktop | 2 +-
+ app/data/scrcpy.desktop         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ mode change 100644 => 100755 app/data/scrcpy-console.desktop
+ mode change 100644 => 100755 app/data/scrcpy.desktop
+
+diff --git a/app/data/scrcpy-console.desktop b/app/data/scrcpy-console.desktop
+old mode 100644
+new mode 100755
+index 47a63ec9..85e1b09b
+--- a/app/data/scrcpy-console.desktop
++++ b/app/data/scrcpy-console.desktop
+@@ -5,7 +5,7 @@ Comment=Display and control your Android device
+ # For some users, the PATH or ADB environment variables are set from the shell
+ # startup file, like .bashrc or .zshrc… Run an interactive shell to get
+ # environment correctly initialized.
+-Exec=/bin/bash --norc --noprofile -i -c '"$SHELL" -i -c scrcpy || read -p "Press any key to quit..."'
++Exec=/bin/bash --norc --noprofile -i -c "\\$SHELL -i -c scrcpy || read -p \\"Press any key to quit...\\""
+ Icon=scrcpy
+ Terminal=true
+ Type=Application
+diff --git a/app/data/scrcpy.desktop b/app/data/scrcpy.desktop
+old mode 100644
+new mode 100755
+index 082b75e0..9fb81d47
+--- a/app/data/scrcpy.desktop
++++ b/app/data/scrcpy.desktop
+@@ -5,7 +5,7 @@ Comment=Display and control your Android device
+ # For some users, the PATH or ADB environment variables are set from the shell
+ # startup file, like .bashrc or .zshrc… Run an interactive shell to get
+ # environment correctly initialized.
+-Exec=/bin/sh -c '"$SHELL" -i -c scrcpy'
++Exec=/bin/sh -c "\\$SHELL -i -c scrcpy"
+ Icon=scrcpy
+ Terminal=false
+ Type=Application
+-- 
+2.39.2
+
