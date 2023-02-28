@@ -13,6 +13,8 @@ URL:            %{forgeurl}
 Source0:        %{forgesource}
 Source1:        https://github.com/Genymobile/%{pkgname}/releases/download/v%{version}/%{pkgname}-server-v%{version}
 
+Patch0:         0001-Fix-exec-quotes-and-escapes.patch
+
 BuildRequires:  meson gcc
 BuildRequires:  java-devel >= 11
 BuildRequires:  desktop-file-utils
@@ -32,7 +34,7 @@ This application provides display and control of Android devices
 connected on USB (or over TCP/IP).
 
 %prep
-%forgesetup
+%forgeautosetup
 
 %build
 %meson -Db_lto=true -Dprebuilt_server='%{S:1}'
@@ -60,4 +62,5 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}-console.d
 %changelog
 * Tue Feb 28 2023 sixg0000d <sixg0000d@gmail.com> - 1.25-3
 - Fork from zeno/scrcpy
-- Use original desktop file
+- Use original desktop files
+- Fix desktop files exec quotes and escapes
