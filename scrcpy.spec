@@ -43,6 +43,7 @@ connected on USB (or over TCP/IP).
 
 %check
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}-console.desktop
 
 %files
 %license LICENSE
