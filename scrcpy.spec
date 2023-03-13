@@ -18,7 +18,7 @@ Source1:        https://github.com/Genymobile/%{pkgname}/releases/download/v%{ve
 Patch0:         0001-Fix-exec-quotes-and-escapes.patch
 # Include missing for older Fedora versions
 # https://github.com/Genymobile/scrcpy/blob/e5aa2ce01f638ebe083c821fd204a45d9d8f317d/app/src/demuxer.c#L198-L203
-Patch101:       0002-Include-missing-for-older-Fedora-versions.patch
+Patch1:         0002-Include-missing-for-older-Fedora-versions.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  java-devel >= 11
@@ -28,8 +28,6 @@ BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(ffms2)
 BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  vulkan-loader
-# Always apply git patches correctly
-BuildRequires:  git
 
 Requires:       android-tools
 
@@ -41,11 +39,10 @@ This application provides display and control of Android devices
 connected on USB (or over TCP/IP).
 
 %prep
+%forgesetup
+%patch0 -p 1
 %if 0%{?fedora} < 37
-%forgeautosetup -S git
-%else
-%forgeautosetup -S git -N
-%autopatch -M 100
+%patch1 -p 1
 %endif
 
 %build
