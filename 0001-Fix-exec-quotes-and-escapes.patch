@@ -20,7 +20,7 @@ index 47a63ec9..ca10bf68 100644
 -# startup file, like .bashrc or .zshrc… Run an interactive shell to get
 -# environment correctly initialized.
 -Exec=/bin/bash --norc --noprofile -i -c '"$SHELL" -i -c scrcpy || read -p "Press any key to quit..."'
-+Exec=/bin/sh -c "scrcpy || read -p \"Press any key to quit...\""
++Exec=/bin/sh -c "scrcpy || read -p \\"Press any key to quit...\\""
  Icon=scrcpy
  Terminal=true
  Type=Application
