@@ -1,36 +1,42 @@
-From 9cb7a7961547f3236bf798da76edf0e09740cde9 Mon Sep 17 00:00:00 2001
+From 4d70902c7cb441832dce615584fcbf3f7a842363 Mon Sep 17 00:00:00 2001
 From: sixg0000d <sixg0000d@gmail.com>
-Date: Tue, 28 Feb 2023 23:51:40 +0800
-Subject: [PATCH] Fix desktop files exec quotes and escapes
+Date: Mon, 13 Mar 2023 14:49:28 +0800
+Subject: [PATCH 1/2] Fix exec quotes and escapes
 
 ---
- app/data/scrcpy-console.desktop | 2 +-
- app/data/scrcpy.desktop         | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ app/data/scrcpy-console.desktop | 5 +----
+ app/data/scrcpy.desktop         | 5 +----
+ 2 files changed, 2 insertions(+), 8 deletions(-)
 
 diff --git a/app/data/scrcpy-console.desktop b/app/data/scrcpy-console.desktop
-index 47a63ec9..85e1b09b 100644
+index 47a63ec9..ca10bf68 100644
 --- a/app/data/scrcpy-console.desktop
 +++ b/app/data/scrcpy-console.desktop
-@@ -5,7 +5,7 @@ Comment=Display and control your Android device
- # For some users, the PATH or ADB environment variables are set from the shell
- # startup file, like .bashrc or .zshrc… Run an interactive shell to get
- # environment correctly initialized.
+@@ -2,10 +2,7 @@
+ Name=scrcpy (console)
+ GenericName=Android Remote Control
+ Comment=Display and control your Android device
+-# For some users, the PATH or ADB environment variables are set from the shell
+-# startup file, like .bashrc or .zshrc… Run an interactive shell to get
+-# environment correctly initialized.
 -Exec=/bin/bash --norc --noprofile -i -c '"$SHELL" -i -c scrcpy || read -p "Press any key to quit..."'
-+Exec=/bin/bash --norc --noprofile -i -c "\\$SHELL -i -c scrcpy || read -p \\"Press any key to quit...\\""
++Exec=/bin/sh -c "scrcpy || read -p \"Press any key to quit...\""
  Icon=scrcpy
  Terminal=true
  Type=Application
 diff --git a/app/data/scrcpy.desktop b/app/data/scrcpy.desktop
-index 082b75e0..9fb81d47 100644
+index 082b75e0..5933272d 100644
 --- a/app/data/scrcpy.desktop
 +++ b/app/data/scrcpy.desktop
-@@ -5,7 +5,7 @@ Comment=Display and control your Android device
- # For some users, the PATH or ADB environment variables are set from the shell
- # startup file, like .bashrc or .zshrc… Run an interactive shell to get
- # environment correctly initialized.
+@@ -2,10 +2,7 @@
+ Name=scrcpy
+ GenericName=Android Remote Control
+ Comment=Display and control your Android device
+-# For some users, the PATH or ADB environment variables are set from the shell
+-# startup file, like .bashrc or .zshrc… Run an interactive shell to get
+-# environment correctly initialized.
 -Exec=/bin/sh -c '"$SHELL" -i -c scrcpy'
-+Exec=/bin/sh -c "\\$SHELL -i -c scrcpy"
++Exec=scrcpy
  Icon=scrcpy
  Terminal=false
  Type=Application

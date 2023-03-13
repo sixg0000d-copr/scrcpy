@@ -1,6 +1,6 @@
 %define         pkgname         scrcpy
 %global         forgeurl        https://github.com/Genymobile/%{pkgname}
-Version:        1.25
+Version:        2.0
 
 %forgemeta
 
@@ -13,7 +13,12 @@ URL:            %{forgeurl}
 Source0:        %{forgesource}
 Source1:        https://github.com/Genymobile/%{pkgname}/releases/download/v%{version}/%{pkgname}-server-v%{version}
 
+# .desktop files are malformed
+# https://github.com/Genymobile/scrcpy/issues/3633
 Patch0:         0001-Fix-exec-quotes-and-escapes.patch
+# Include missing for older Fedora versions
+# https://github.com/Genymobile/scrcpy/blob/e5aa2ce01f638ebe083c821fd204a45d9d8f317d/app/src/demuxer.c#L198-L203
+Patch101:       0002-Include-missing-for-older-Fedora-versions.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  java-devel >= 11
@@ -23,6 +28,8 @@ BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(ffms2)
 BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  vulkan-loader
+# Always apply git patches correctly
+BuildRequires:  git
 
 Requires:       android-tools
 
@@ -34,7 +41,12 @@ This application provides display and control of Android devices
 connected on USB (or over TCP/IP).
 
 %prep
-%forgeautosetup -p 1
+%if 0%{?fedora} < 37
+%forgeautosetup -S git
+%else
+%forgeautosetup -S git -N
+%autopatch -M 100
+%endif
 
 %build
 %meson -Db_lto=true -Dprebuilt_server='%{S:1}'
@@ -49,7 +61,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}-console.d
 
 %files
 %license LICENSE
-%doc README.md DEVELOP.md FAQ.md
+%doc README.md FAQ.md
 %{_bindir}/%{pkgname}
 %{_datadir}/%{pkgname}
 %{_mandir}/man1/%{pkgname}.1*
@@ -60,6 +72,10 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}-console.d
 %{_datadir}/zsh/site-functions/_%{pkgname}
 
 %changelog
+* Mon Mar 13 2023 sixg0000d <sixg0000d@gmail.com> - 2.0-3
+- New version
+- Include missing for older Fedora versions
+
 * Tue Feb 28 2023 sixg0000d <sixg0000d@gmail.com> - 1.25-3
 - Fork from zeno/scrcpy
 - Use original desktop files

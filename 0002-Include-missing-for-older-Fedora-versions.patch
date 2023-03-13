@@ -1,0 +1,24 @@
+From 32a8b876416a948cc0bb2ddfcfbcd1f14a842b4d Mon Sep 17 00:00:00 2001
+From: sixg0000d <sixg0000d@gmail.com>
+Date: Mon, 13 Mar 2023 14:49:54 +0800
+Subject: [PATCH 2/2] Include missing for older Fedora versions
+
+---
+ app/src/demuxer.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/app/src/demuxer.c b/app/src/demuxer.c
+index 96303155..d946d355 100644
+--- a/app/src/demuxer.c
++++ b/app/src/demuxer.c
+@@ -2,6 +2,7 @@
+ 
+ #include <assert.h>
+ #include <libavutil/time.h>
++#include <libavutil/channel_layout.h>
+ #include <unistd.h>
+ 
+ #include "decoder.h"
+-- 
+2.39.2
+
