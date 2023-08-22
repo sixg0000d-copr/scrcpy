@@ -36,11 +36,7 @@ This application provides display and control of Android devices
 connected on USB (or over TCP/IP).
 
 %prep
-%forgesetup
-%patch0 -p 1
-%if 0%{?fedora} < 37
-%patch1 -p 1
-%endif
+%forgeautosetup -p 1
 
 %build
 %meson -Db_lto=true -Dprebuilt_server='%{S:1}'
