@@ -1,11 +1,11 @@
 %define         pkgname         scrcpy
 %global         forgeurl        https://github.com/Genymobile/%{pkgname}
-Version:        2.0
+Version:        2.1.1
 
 %forgemeta
 
 Name:           %{pkgname}
-Release:        3%{?dist}
+Release:        1%{?dist}
 Summary:        Display and control your Android device
 License:        ASL 2.0
 
@@ -16,9 +16,6 @@ Source1:        https://github.com/Genymobile/%{pkgname}/releases/download/v%{ve
 # .desktop files are malformed
 # https://github.com/Genymobile/scrcpy/issues/3633
 Patch0:         0001-Fix-exec-quotes-and-escapes.patch
-# Include missing for older Fedora versions
-# https://github.com/Genymobile/scrcpy/blob/e5aa2ce01f638ebe083c821fd204a45d9d8f317d/app/src/demuxer.c#L198-L203
-Patch1:         0002-Include-missing-for-older-Fedora-versions.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  java-devel >= 11
@@ -53,8 +50,7 @@ connected on USB (or over TCP/IP).
 %meson_install
 
 %check
-desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}.desktop
-desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}-console.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{pkgname}{,-console}.desktop
 
 %files
 %license LICENSE
