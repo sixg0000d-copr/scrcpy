@@ -24,6 +24,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(ffms2)
 BuildRequires:  pkgconfig(libusb-1.0)
+BuildRequires:  pkgconfig(libavdevice)
 BuildRequires:  vulkan-loader
 # Always apply git patches correctly
 BuildRequires:  git
