@@ -25,6 +25,8 @@ BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(ffms2)
 BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  vulkan-loader
+# Always apply git patches correctly
+BuildRequires:  git
 
 Requires:       android-tools
 
@@ -36,7 +38,7 @@ This application provides display and control of Android devices
 connected on USB (or over TCP/IP).
 
 %prep
-%forgeautosetup -p 1
+%forgeautosetup -S git
 
 %build
 %meson -Db_lto=true -Dprebuilt_server='%{S:1}'
